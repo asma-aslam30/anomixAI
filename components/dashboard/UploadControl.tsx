@@ -6,8 +6,10 @@ import { api } from "@/lib/api";
 import { ClassifiedSpike } from "@/lib/types";
 import { Loader2, FileUp, Zap } from "lucide-react";
 
+import type { LogEntry } from "@/lib/types";
+
 interface UploadControlProps {
-  onComplete: (incidents: ClassifiedSpike[]) => void;
+  onComplete: (incidents: ClassifiedSpike[], logEntries?: LogEntry[]) => void;
   onUploadStart?: () => void;
 }
 
@@ -34,14 +36,14 @@ export default function UploadControl({ onComplete, onUploadStart }: UploadContr
     if (!file) return;
     setLoading(true);
     try {
-      await api.uploadLogs(file);
-      const { incidents } = await api.analyze();
+      const uploadRes = await api.uploadLogs(file);
+      const { incidents } = await api.analyze(uploadRes.log_entries);
       await Promise.all(
         incidents.map(inc =>
-          Promise.all([api.rca(inc.spike_id), api.impact(inc.spike_id), api.fix(inc.spike_id)])
+          Promise.all([api.rca(inc.spike_id, inc), api.impact(inc.spike_id, inc), api.fix(inc.spike_id, inc)])
         )
       );
-      onComplete(incidents);
+      onComplete(incidents, uploadRes.log_entries);
       toast({ title: "Analysis complete", description: `${incidents.length} incident(s) detected.` });
     } catch (err: unknown) {
       const detail = err instanceof Error ? err.message : "Upload failed";

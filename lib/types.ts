@@ -89,6 +89,7 @@ export interface ChatResponse {
 export interface UploadResponse {
   parsed_count: number;
   skipped_count: number;
+  log_entries?: LogEntry[];
   request_id: string;
 }
 

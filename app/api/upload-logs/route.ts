@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
       store.logsByService[entry.service_name].push(entry);
     }
 
-    return NextResponse.json({ parsed_count: parsedCount, skipped_count: skippedCount, request_id: requestId });
+    return NextResponse.json({ parsed_count: parsedCount, skipped_count: skippedCount, log_entries: entries, request_id: requestId });
   } catch (err) {
     return NextResponse.json({ detail: `Parse error: ${String(err)}`, request_id: requestId }, { status: 422 });
   }

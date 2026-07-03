@@ -7,6 +7,7 @@ import type {
   ChatRequest,
   ChatResponse,
   OrchestrationResult,
+  ClassifiedSpike,
   LogEntry,
   Alert,
 } from "./types";
@@ -48,42 +49,45 @@ export const api = {
     return res.json();
   },
 
-  analyze(): Promise<AnalyzeResponse> {
-    return request<AnalyzeResponse>("/api/analyze", { method: "POST", body: "{}" });
+  analyze(logEntries?: LogEntry[]): Promise<AnalyzeResponse> {
+    return request<AnalyzeResponse>("/api/analyze", {
+      method: "POST",
+      body: JSON.stringify({ log_entries: logEntries }),
+    });
   },
 
-  rca(spikeId: string): Promise<RCAReport> {
+  rca(spikeId: string, spike?: ClassifiedSpike): Promise<RCAReport> {
     return request<RCAReport>("/api/rca", {
       method: "POST",
-      body: JSON.stringify({ spike_id: spikeId }),
+      body: JSON.stringify({ spike_id: spikeId, spike }),
     });
   },
 
-  impact(spikeId: string): Promise<BusinessImpactReport> {
+  impact(spikeId: string, spike?: ClassifiedSpike): Promise<BusinessImpactReport> {
     return request<BusinessImpactReport>("/api/impact", {
       method: "POST",
-      body: JSON.stringify({ spike_id: spikeId }),
+      body: JSON.stringify({ spike_id: spikeId, spike }),
     });
   },
 
-  fix(spikeId: string): Promise<RemediationPlan> {
+  fix(spikeId: string, spike?: ClassifiedSpike): Promise<RemediationPlan> {
     return request<RemediationPlan>("/api/fix", {
       method: "POST",
-      body: JSON.stringify({ spike_id: spikeId }),
+      body: JSON.stringify({ spike_id: spikeId, spike }),
     });
   },
 
-  chat(req: ChatRequest): Promise<ChatResponse> {
+  chat(req: ChatRequest & { spike?: ClassifiedSpike; rca?: RCAReport; impact?: BusinessImpactReport; plan?: RemediationPlan }): Promise<ChatResponse> {
     return request<ChatResponse>("/api/chat", {
       method: "POST",
       body: JSON.stringify(req),
     });
   },
 
-  orchestrate(spikeId: string): Promise<OrchestrationResult> {
+  orchestrate(spikeId: string, spike?: ClassifiedSpike): Promise<OrchestrationResult> {
     return request<OrchestrationResult>("/api/orchestrate", {
       method: "POST",
-      body: JSON.stringify({ spike_id: spikeId }),
+      body: JSON.stringify({ spike_id: spikeId, spike }),
     });
   },
 

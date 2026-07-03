@@ -101,7 +101,7 @@ export default function DashboardPage() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleComplete = async (newIncidents: ClassifiedSpike[]) => {
+  const handleComplete = async (newIncidents: ClassifiedSpike[], newLogEntries?: import("@/lib/types").LogEntry[]) => {
     setIncidents(newIncidents);
     setSelected(null);
     setRca(null);
@@ -125,10 +125,14 @@ export default function DashboardPage() {
       setStaticBurst(true);
       setTimeout(() => { setEntityVisible(false); setStaticBurst(false); }, 2500);
     }
-    try {
-      const { log_entries } = await api.getLogs();
-      setLogEntries(log_entries);
-    } catch { /* non-fatal */ }
+    if (newLogEntries) {
+      setLogEntries(newLogEntries);
+    } else {
+      try {
+        const { log_entries } = await api.getLogs();
+        setLogEntries(log_entries);
+      } catch { /* non-fatal */ }
+    }
   };
 
   const handleSelect = async (spike: ClassifiedSpike) => {
@@ -192,14 +196,14 @@ export default function DashboardPage() {
 
     try {
       const [rcaRes, impactRes, planRes] = await Promise.all([
-        api.rca(spike.spike_id).catch(() => null),
-        api.impact(spike.spike_id).catch(() => null),
-        api.fix(spike.spike_id).catch(() => null),
+        api.rca(spike.spike_id, spike).catch(() => null),
+        api.impact(spike.spike_id, spike).catch(() => null),
+        api.fix(spike.spike_id, spike).catch(() => null),
       ]);
       setRca(rcaRes);
       setImpact(impactRes);
       setPlan(planRes);
-      const orchRes = await api.orchestrate(spike.spike_id).catch(() => null);
+      const orchRes = await api.orchestrate(spike.spike_id, spike).catch(() => null);
       setOrchResult(orchRes);
       if (orchRes) {
         setIpThreat((orchRes as unknown as { ip_threat?: IpThreatReport }).ip_threat ?? null);
@@ -221,7 +225,14 @@ export default function DashboardPage() {
     setChatLoading(true);
     audio.play("chat");
     try {
-      const res = await api.chat({ message: msg, incident_id: selected?.spike_id ?? null });
+      const res = await api.chat({
+        message: msg,
+        incident_id: selected?.spike_id ?? null,
+        spike: selected ?? undefined,
+        rca: rca ?? undefined,
+        impact: impact ?? undefined,
+        plan: plan ?? undefined,
+      });
       const reply = res.reply;
       setChatMessages(prev => [...prev, { role: "assistant", text: reply }]);
       audio.play("complete");
