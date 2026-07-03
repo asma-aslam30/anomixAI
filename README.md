@@ -2,7 +2,7 @@
 
 > **Incident Intelligence & Response** — upload logs, detect anomalies, and get AI-powered root cause analysis, business impact estimates, and remediation plans in seconds.
 
-Built for the GDG Hackathon. Powered by **Google Gemini 2.5 Flash** and **Next.js 14**.
+Built for the Hackathon. Powered by **Google Gemini 2.5 Flash** and **Next.js 14**.
 
 ---
 
