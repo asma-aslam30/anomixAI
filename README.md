@@ -1,4 +1,4 @@
-# Anomix — Sentinel AI
+# AnomixAI
 
 > **Incident Intelligence & Response** — upload logs, detect anomalies, and get AI-powered root cause analysis, business impact estimates, and remediation plans in seconds.
 
@@ -54,7 +54,7 @@ Upload logs → Detect spikes (Z-score) → Classify (POSITIVE / NEGATIVE / SUSP
 ## Project structure
 
 ```
-sentinel-ai/
+anomixAI/
 ├── app/
 │   ├── layout.tsx                 # Root layout
 │   ├── page.tsx                   # Single-page dashboard
@@ -105,7 +105,7 @@ sentinel-ai/
 ### 1. Install dependencies
 
 ```bash
-cd sentinel-ai
+cd anomixAI
 npm install
 ```
 
