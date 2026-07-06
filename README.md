@@ -1,5 +1,4 @@
-Here is your **updated complete README as a markdown file** (ready to copy-paste into `README.md`):
-
+ 
 ```md
 # AnomixAI
 
@@ -11,7 +10,7 @@ Built for the Hackathon. Powered by **Google Gemini 2.5 Flash** and **Next.js 14
 
 ## 🚨 Real-Time Incident Story
 
-## It’s Friday — 6:45 PM
+### It’s Friday — 6:45 PM
 
 Everyone is getting ready to leave the office.
 
@@ -28,16 +27,14 @@ Backend engineers start digging through logs.
 Security suspects a DDoS attack.  
 Management wants answers immediately.
 
-### ❓ The Big Question
+### ❓ Is this a real incident or just a healthy spike?
 
-Is this a real incident or just a healthy traffic spike?
-
-Because not every spike is bad.
+Not every spike is bad.
 
 - Sometimes it means your product just went viral  
 - Sometimes it’s a scheduled deployment  
 - Sometimes it’s Black Friday traffic  
-- Sometimes it’s a system outage starting  
+- Sometimes it’s a system outage  
 
 Teams spend 30–60 minutes investigating...
 
@@ -45,44 +42,40 @@ And then realize:
 
 > It was just a successful marketing campaign.
 
-No attack.  
-No outage.  
-No emergency.  
+No attack. No outage. No emergency.
 
-Just wasted time and delayed decisions.
+Just wasted time, delayed decisions, and alert fatigue.
 
 ---
 
-# 💡 Why Anomix Exists
+## 💡 Why Anomix Exists
 
-## Anomix – Sentinel AI
+**Anomix – Sentinel AI** is an AI-powered Incident Intelligence and Response platform that understands incidents before engineers waste time investigating them.
 
-Anomix is an AI-powered Incident Intelligence and Response platform that understands incidents before humans waste time investigating them.
-
-Instead of manually inspecting logs, Anomix analyzes:
+It processes:
 
 - CSV logs  
 - JSON logs  
 - Plaintext logs  
 
-within seconds.
+in seconds.
 
 ---
 
-## ⚙️ What it does
+## ⚙️ What It Does
 
-Anomix ingests raw log files and produces:
+Anomix produces:
 
-- 🔍 **Root Cause Analysis** — Gemini-powered diagnosis  
-- 💰 **Business Impact** — users affected, downtime, revenue loss (PKR)  
-- 🛠 **Remediation Plan** — immediate + long-term fixes  
-- 🔗 **Correlation Analysis** — cascading service failures  
-- 🛡 **Threat Intelligence** — DDoS / abuse detection  
-- 🌐 **IP Threat Report** — malicious IP identification  
-- ⚖️ **Load Balancer Recommendations** — scaling suggestions  
-- 🧾 **Executive Summary** — ≤ 300-word plain explanation  
-- 📡 **Real-time Alerts** — SSE + email + WhatsApp mock  
-- 🤖 **AI Copilot Chat** — ask questions in natural language  
+- 🔍 Root Cause Analysis (AI-powered)
+- 💰 Business Impact (users, downtime, revenue loss in PKR)
+- 🛠 Remediation Plans (short + long term fixes)
+- 🔗 Correlation Analysis (cross-service failures)
+- 🛡 Threat Intelligence (DDoS / abuse detection)
+- 🌐 IP Threat Reports (malicious IP identification)
+- ⚖️ Load Balancer Recommendations
+- 🧾 Executive Summary (≤ 300 words)
+- 📡 Real-time Alerts (SSE + email + WhatsApp mock)
+- 🤖 AI Copilot Chat (natural language incident Q&A)
 
 ---
 
@@ -90,21 +83,21 @@ Anomix ingests raw log files and produces:
 
 ```
 
-Upload logs
+Upload Logs
 ↓
 Z-Score Spike Detection
 ↓
 Classification:
 
-* POSITIVE
-* NEGATIVE
-* SUSPICIOUS
+* POSITIVE_SPIKE
+* NEGATIVE_SPIKE
+* SUSPICIOUS_SPIKE
   ↓
-  Multi-Agent Orchestration:
+  Multi-Agent AI System:
   RCA Agent
   Impact Agent + Correlation Agent
   Remediation Agent
-  Threat Intelligence (conditional)
+  Threat Intelligence Agent (conditional)
   IP Threat Agent
   Load Balancer Agent
   Summary Agent
@@ -118,13 +111,13 @@ Classification:
 ## 🧱 Tech Stack
 
 | Layer | Technology |
-|------|-----------|
+|------|------------|
 | Framework | Next.js 14 (App Router) |
-| Language | TypeScript 5 |
-| AI Engine | Google Gemini 2.5 Flash |
-| UI | React, Tailwind CSS, ShadCN |
+| Language | TypeScript |
+| AI | Google Gemini 2.5 Flash |
+| UI | React, Tailwind CSS, ShadCN UI |
 | Visualization | Recharts |
-| State | In-memory singleton store |
+| State | In-memory store |
 | Alerts | Server-Sent Events (SSE) |
 
 ---
@@ -148,14 +141,12 @@ anomixAI/
 │   │   └── alerts/stream/
 │   ├── layout.tsx
 │   └── page.tsx
-│
 ├── components/
 ├── lib/
 │   ├── services/
 │   ├── store.ts
 │   ├── types.ts
 │   └── utils.ts
-│
 └── public/
 └── sample_logs.csv
 
@@ -165,23 +156,22 @@ anomixAI/
 
 ## 🚀 Getting Started
 
-### 1. Install
+### 1. Install dependencies
 
 ```bash
-cd anomixAI
 npm install
 ````
 
----
-
-### 2. Configure Environment
+### 2. Setup environment
 
 ```bash
 cp .env.example .env.local
 ```
 
+Add:
+
 ```env
-GEMINI_API_KEY=your_key_here
+GEMINI_API_KEY=your_api_key_here
 REVENUE_PER_MINUTE_PKR=50000
 Z_SCORE_THRESHOLD=2.0
 MOCK_EMAIL=true
@@ -189,7 +179,7 @@ MOCK_EMAIL=true
 
 ---
 
-### 3. Run Project
+### 3. Run project
 
 ```bash
 npm run dev
@@ -203,36 +193,35 @@ http://localhost:3000
 
 ---
 
-## 🧪 Using the System
+## 🧪 How It Works
 
-1. Upload logs (`CSV / JSON / TXT`)
-2. System auto-detects spikes
-3. Select incident from dashboard
-4. Explore:
+1. Upload logs (CSV / JSON / TXT)
+2. System detects anomalies using Z-score
+3. Classifies spike type
+4. Runs multi-agent AI pipeline
+5. Generates:
 
    * RCA
-   * Impact
-   * Remediation
-   * Threats
-   * Load balancing
-5. Chat with AI Copilot
-6. View real-time alerts
+   * Impact analysis
+   * Fix suggestions
+   * Threat detection
+   * Executive summary
+6. Streams real-time alerts
+7. Chat with AI Copilot
 
 ---
 
 ## 📊 Spike Types
 
-| Type             | Meaning                  |
-| ---------------- | ------------------------ |
-| POSITIVE_SPIKE   | Viral / traffic surge    |
-| NEGATIVE_SPIKE   | Drop or degradation      |
-| SUSPICIOUS_SPIKE | Possible attack or abuse |
+| Type             | Meaning                               |
+| ---------------- | ------------------------------------- |
+| POSITIVE_SPIKE   | Traffic surge (viral / load increase) |
+| NEGATIVE_SPIKE   | Service degradation                   |
+| SUSPICIOUS_SPIKE | Potential attack or abuse             |
 
 ---
 
 ## 🤖 Multi-Agent System
-
-Each incident runs through:
 
 * RCA Agent
 * Impact Agent
@@ -243,11 +232,11 @@ Each incident runs through:
 * Load Balancer Agent
 * Summary Agent
 
-All outputs are traced in real-time via **Agent Trace UI**.
+All outputs are tracked in an **Agent Trace system**.
 
 ---
 
-## 📡 API Endpoints
+## 📡 API Reference
 
 | Method | Endpoint           |
 | ------ | ------------------ |
@@ -270,17 +259,7 @@ All outputs are traced in real-time via **Agent Trace UI**.
 timestamp, service_name, request_count, error_rate, latency_ms
 ```
 
-Supports:
-
-* CSV
-* JSON
-* Plaintext logs
-
----
-
-## 🧠 Key Idea
-
-> From raw logs → to intelligent decisions in seconds
+Also supports JSON and plaintext logs.
 
 ---
 
@@ -300,7 +279,8 @@ Anomix transforms raw logs into intelligent decisions — helping organizations 
 
 ---
 
-If you want next upgrade, I can also:
-- make it **GitHub viral README (with badges + GIF + architecture diagram)**
-- or turn it into a **hackathon pitch deck (10 slides)**
+If you want next step, I can also:
+- :contentReference[oaicite:0]{index=0}
+- :contentReference[oaicite:1]{index=1}
+- or :contentReference[oaicite:2]{index=2}
 ```
