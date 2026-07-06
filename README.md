@@ -1,3 +1,6 @@
+Here is your **updated complete README as a markdown file** (ready to copy-paste into `README.md`):
+
+```md
 # AnomixAI
 
 > **Incident Intelligence & Response** — upload logs, detect anomalies, and get AI-powered root cause analysis, business impact estimates, and remediation plans in seconds.
@@ -6,232 +9,298 @@ Built for the Hackathon. Powered by **Google Gemini 2.5 Flash** and **Next.js 14
 
 ---
 
-## What it does
+## 🚨 Real-Time Incident Story
 
-Anomix ingests raw log files (CSV, JSON, plaintext), runs statistical spike detection, and drives a multi-agent AI pipeline that produces:
+## It’s Friday — 6:45 PM
 
-- **Root Cause Analysis** — Gemini-powered chain-of-thought diagnosis
-- **Business Impact** — users affected, downtime estimate, revenue loss (PKR)
-- **Remediation Plan** — immediate, short-term, and long-term actions
-- **Correlation Analysis** — cascading failure patterns across services
-- **Threat Intelligence** — attack classification for suspicious traffic spikes
-- **IP Threat Report** — malicious/suspicious IP breakdown with block recommendations
-- **Load Balancer Recommendations** — auto-scaling actions and cluster rebalancing
-- **Executive Summary** — a ≤ 300-word plain-language incident brief
-- **Real-time Alerts** — SSE-streamed browser notifications + mock email/WhatsApp for SEV-1/CRITICAL
-- **AI Copilot Chat** — ask anything about the active incident in natural language
+Everyone is getting ready to leave the office.
 
-All of this runs as a single Next.js app — no separate backend, no database, no container setup. One `npm run dev` and you're live.
+Suddenly...
+
+- CPU usage jumps to 95%  
+- Requests per second spike  
+- Error rates start increasing  
+
+Slack starts exploding.
+
+DevOps opens Grafana.  
+Backend engineers start digging through logs.  
+Security suspects a DDoS attack.  
+Management wants answers immediately.
+
+### ❓ The Big Question
+
+Is this a real incident or just a healthy traffic spike?
+
+Because not every spike is bad.
+
+- Sometimes it means your product just went viral  
+- Sometimes it’s a scheduled deployment  
+- Sometimes it’s Black Friday traffic  
+- Sometimes it’s a system outage starting  
+
+Teams spend 30–60 minutes investigating...
+
+And then realize:
+
+> It was just a successful marketing campaign.
+
+No attack.  
+No outage.  
+No emergency.  
+
+Just wasted time and delayed decisions.
 
 ---
 
-## Demo pipeline
+# 💡 Why Anomix Exists
+
+## Anomix – Sentinel AI
+
+Anomix is an AI-powered Incident Intelligence and Response platform that understands incidents before humans waste time investigating them.
+
+Instead of manually inspecting logs, Anomix analyzes:
+
+- CSV logs  
+- JSON logs  
+- Plaintext logs  
+
+within seconds.
+
+---
+
+## ⚙️ What it does
+
+Anomix ingests raw log files and produces:
+
+- 🔍 **Root Cause Analysis** — Gemini-powered diagnosis  
+- 💰 **Business Impact** — users affected, downtime, revenue loss (PKR)  
+- 🛠 **Remediation Plan** — immediate + long-term fixes  
+- 🔗 **Correlation Analysis** — cascading service failures  
+- 🛡 **Threat Intelligence** — DDoS / abuse detection  
+- 🌐 **IP Threat Report** — malicious IP identification  
+- ⚖️ **Load Balancer Recommendations** — scaling suggestions  
+- 🧾 **Executive Summary** — ≤ 300-word plain explanation  
+- 📡 **Real-time Alerts** — SSE + email + WhatsApp mock  
+- 🤖 **AI Copilot Chat** — ask questions in natural language  
+
+---
+
+## 🧠 Demo Pipeline
 
 ```
-Upload logs → Detect spikes (Z-score) → Classify (POSITIVE / NEGATIVE / SUSPICIOUS)
-    → Multi-agent orchestration:
-        RCA Agent → Impact Agent + Correlation Agent (parallel)
-        → Remediation Agent → Threat Intel Agent (conditional)
-        → IP Threat Agent → Load Balancer Agent → Summary Agent
-    → Alert dispatch (SEV-1 / CRITICAL only)
+
+Upload logs
+↓
+Z-Score Spike Detection
+↓
+Classification:
+
+* POSITIVE
+* NEGATIVE
+* SUSPICIOUS
+  ↓
+  Multi-Agent Orchestration:
+  RCA Agent
+  Impact Agent + Correlation Agent
+  Remediation Agent
+  Threat Intelligence (conditional)
+  IP Threat Agent
+  Load Balancer Agent
+  Summary Agent
+  ↓
+  Real-time Alerts (SEV-1 / CRITICAL)
+
 ```
 
 ---
 
-## Tech stack
+## 🧱 Tech Stack
 
 | Layer | Technology |
-|---|---|
+|------|-----------|
 | Framework | Next.js 14 (App Router) |
 | Language | TypeScript 5 |
-| AI | Google Gemini 2.5 Flash (`@google/generative-ai`) |
-| UI | React 18, Tailwind CSS, ShadCN (Radix UI), Recharts |
-| State | In-memory singleton store (Node.js process scope) |
-| Alerts | Server-Sent Events (SSE), mock email, mock WhatsApp webhook |
+| AI Engine | Google Gemini 2.5 Flash |
+| UI | React, Tailwind CSS, ShadCN |
+| Visualization | Recharts |
+| State | In-memory singleton store |
+| Alerts | Server-Sent Events (SSE) |
 
 ---
 
-## Project structure
+## 📁 Project Structure
 
 ```
+
 anomixAI/
 ├── app/
-│   ├── layout.tsx                 # Root layout
-│   ├── page.tsx                   # Single-page dashboard
-│   └── api/
-│       ├── upload-logs/           # POST — parse and store log file
-│       ├── analyze/               # POST — spike detection + classification
-│       ├── rca/                   # POST — root cause analysis
-│       ├── impact/                # POST — business impact calculation
-│       ├── fix/                   # POST — remediation plan
-│       ├── chat/                  # POST — AI copilot
-│       ├── orchestrate/           # POST — full multi-agent pipeline
-│       ├── logs/                  # GET  — retrieve stored log entries
-│       ├── health/                # GET  — health check
-│       └── alerts/stream/         # GET  — SSE alert stream
+│   ├── api/
+│   │   ├── upload-logs/
+│   │   ├── analyze/
+│   │   ├── rca/
+│   │   ├── impact/
+│   │   ├── fix/
+│   │   ├── chat/
+│   │   ├── orchestrate/
+│   │   ├── logs/
+│   │   ├── health/
+│   │   └── alerts/stream/
+│   ├── layout.tsx
+│   └── page.tsx
+│
 ├── components/
-│   ├── dashboard/                 # Feature components (RCA, Impact, Chat, etc.)
-│   └── ui/                        # ShadCN primitives
 ├── lib/
-│   ├── types.ts                   # All TypeScript interfaces
-│   ├── store.ts                   # In-memory store singleton
-│   ├── api.ts                     # Typed client-side fetch wrappers
-│   ├── utils.ts                   # Helpers (cn, formatPKR, newId)
-│   └── services/
-│       ├── ingestion.ts           # CSV / JSON / plaintext parser
-│       ├── spike-detector.ts      # Z-score anomaly detection
-│       ├── spike-classifier.ts    # POSITIVE / NEGATIVE / SUSPICIOUS classifier
-│       ├── rca-engine.ts          # Gemini RCA prompt + fallback
-│       ├── impact-calculator.ts   # Users, downtime, revenue loss
-│       ├── remediation-advisor.ts # Gemini remediation + fallbacks
-│       ├── alert-dispatcher.ts    # Severity assignment + alert channels
-│       ├── chat-copilot.ts        # Gemini chat with incident context
-│       ├── orchestrator.ts        # Multi-agent pipeline coordinator
-│       ├── ip-threat-agent.ts     # IP threat intelligence
-│       └── load-balancer-agent.ts # Load balancer recommendations
+│   ├── services/
+│   ├── store.ts
+│   ├── types.ts
+│   └── utils.ts
+│
 └── public/
-    └── sample_logs.csv            # 50+ rows, 3 services, guaranteed spikes
-```
+└── sample_logs.csv
+
+````
 
 ---
 
-## Getting started
+## 🚀 Getting Started
 
-### Prerequisites
-
-- Node.js 18+
-- A [Google Gemini API key](https://aistudio.google.com/app/apikey) (free tier works)
-
-### 1. Install dependencies
+### 1. Install
 
 ```bash
 cd anomixAI
 npm install
-```
+````
 
-### 2. Configure environment
+---
+
+### 2. Configure Environment
 
 ```bash
 cp .env.example .env.local
 ```
 
-Open `.env.local` and set your key:
-
 ```env
-GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_API_KEY=your_key_here
+REVENUE_PER_MINUTE_PKR=50000
+Z_SCORE_THRESHOLD=2.0
+MOCK_EMAIL=true
 ```
 
-The other variables have sensible defaults and are optional:
+---
 
-| Variable | Default | Description |
-|---|---|---|
-| `GEMINI_API_KEY` | — | **Required.** Google Gemini API key |
-| `REVENUE_PER_MINUTE_PKR` | `50000` | Revenue rate for impact calculation (PKR/min) |
-| `Z_SCORE_THRESHOLD` | `2.0` | Z-score cutoff for spike detection |
-| `MOCK_EMAIL` | `true` | Log alert emails to console instead of sending |
-| `ALERT_EMAIL` | `alerts@sentinelai.local` | Recipient for incident alerts |
-| `WHATSAPP_WEBHOOK_URL` | `http://localhost:9000/mock-webhook` | WhatsApp webhook target |
-
-### 3. Run
+### 3. Run Project
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
-
----
-
-## Using the dashboard
-
-1. **Upload logs** — click the upload button in the header or use the included `public/sample_logs.csv` as a quick start.
-2. **Run analysis** — the pipeline triggers automatically after upload, detecting and classifying spikes.
-3. **Select an incident** — click any incident in the left sidebar to load its full AI analysis.
-4. **Explore panels** — RCA, Business Impact, Remediation, IP Threats, Load Balancer, and the Agent Trace all populate for the selected incident.
-5. **Chat** — use the AI Copilot on the right to ask questions about the active incident in plain language.
-6. **Alerts** — SEV-1 and CRITICAL incidents dispatch browser alerts visible in the footer.
-
----
-
-## Spike classification
-
-| Type | Description |
-|---|---|
-| `POSITIVE_SPIKE` | Unusual traffic surge — potential viral event or capacity issue |
-| `NEGATIVE_SPIKE` | Sharp drop in requests / elevated errors — likely service degradation |
-| `SUSPICIOUS_SPIKE` | Anomalous pattern matching DDoS, scraping, credential stuffing, or API abuse |
-
-Severity levels: `SEV-3` → `SEV-2` → `SEV-1` → `CRITICAL`
-
----
-
-## Multi-agent orchestration
-
-The `POST /api/orchestrate` endpoint runs all agents in dependency order:
+Open:
 
 ```
-Step 1  RCA Agent              (sequential)
-Step 2  Impact Agent           (sequential — no Gemini call needed)
-        Correlation Agent      (Gemini — cross-incident pattern detection)
-Step 3  Remediation Agent      (sequential — uses RCA + Impact)
-Step 4  Threat Intel Agent     (conditional — SUSPICIOUS_SPIKE only)
-Step 4b IP Threat Agent        (sequential)
-        Load Balancer Agent    (sequential)
-Step 5  Summary Agent          (synthesises all outputs → ≤ 300-word brief)
-Step 6  Alert dispatch         (SEV-1 / CRITICAL only)
-```
-
-Each agent appends an `AgentTraceEntry` to the result — visible in the Agent Trace panel on the dashboard.
-
-All agents have rule-based fallbacks so the pipeline always completes, even without a Gemini API key.
-
----
-
-## API reference
-
-| Method | Path | Description |
-|---|---|---|
-| `GET` | `/api/health` | Health check |
-| `POST` | `/api/upload-logs` | Upload a log file (multipart) |
-| `POST` | `/api/analyze` | Run spike detection + classification |
-| `POST` | `/api/rca` | Run root cause analysis for a spike |
-| `POST` | `/api/impact` | Calculate business impact for a spike |
-| `POST` | `/api/fix` | Generate remediation plan for a spike |
-| `POST` | `/api/orchestrate` | Run full multi-agent pipeline for a spike |
-| `POST` | `/api/chat` | Send a message to the AI copilot |
-| `GET` | `/api/logs` | Retrieve stored log entries |
-| `GET` | `/api/alerts/stream` | SSE stream of dispatched alerts |
-
----
-
-## Log file format
-
-Upload a CSV with these columns (extra columns are ignored):
-
-```
-timestamp, service_name, request_count, error_rate, latency_ms, status_200, status_500, status_503
-```
-
-JSON and plaintext formats are also supported — the ingestion layer applies best-effort field coercion.
-
-A ready-to-use sample file is at `public/sample_logs.csv`.
-
----
-
-## Development commands
-
-```bash
-npm run dev          # Start dev server on :3000
-npm run build        # Production build
-npm run start        # Start production server
-npm run lint         # ESLint
-npm run type-check   # TypeScript check (no emit)
+http://localhost:3000
 ```
 
 ---
 
-## Notes
+## 🧪 Using the System
 
-- All state is in-memory and resets on server restart or new upload. There is no persistent storage by design.
-- Gemini calls include 300–500 ms delays between sequential requests to respect free-tier rate limits.
-- Without a `GEMINI_API_KEY`, all agents fall back to deterministic rule-based outputs — the dashboard still works end-to-end.
+1. Upload logs (`CSV / JSON / TXT`)
+2. System auto-detects spikes
+3. Select incident from dashboard
+4. Explore:
+
+   * RCA
+   * Impact
+   * Remediation
+   * Threats
+   * Load balancing
+5. Chat with AI Copilot
+6. View real-time alerts
+
+---
+
+## 📊 Spike Types
+
+| Type             | Meaning                  |
+| ---------------- | ------------------------ |
+| POSITIVE_SPIKE   | Viral / traffic surge    |
+| NEGATIVE_SPIKE   | Drop or degradation      |
+| SUSPICIOUS_SPIKE | Possible attack or abuse |
+
+---
+
+## 🤖 Multi-Agent System
+
+Each incident runs through:
+
+* RCA Agent
+* Impact Agent
+* Correlation Agent
+* Remediation Agent
+* Threat Intelligence Agent
+* IP Analysis Agent
+* Load Balancer Agent
+* Summary Agent
+
+All outputs are traced in real-time via **Agent Trace UI**.
+
+---
+
+## 📡 API Endpoints
+
+| Method | Endpoint           |
+| ------ | ------------------ |
+| GET    | /api/health        |
+| POST   | /api/upload-logs   |
+| POST   | /api/analyze       |
+| POST   | /api/rca           |
+| POST   | /api/impact        |
+| POST   | /api/fix           |
+| POST   | /api/orchestrate   |
+| POST   | /api/chat          |
+| GET    | /api/logs          |
+| GET    | /api/alerts/stream |
+
+---
+
+## 📄 Log Format
+
+```
+timestamp, service_name, request_count, error_rate, latency_ms
+```
+
+Supports:
+
+* CSV
+* JSON
+* Plaintext logs
+
+---
+
+## 🧠 Key Idea
+
+> From raw logs → to intelligent decisions in seconds
+
+---
+
+## ⚡ Why Anomix?
+
+Because incidents don’t wait.
+
+And neither should your investigation.
+
+---
+
+## 🏁 Final Statement
+
+Anomix transforms raw logs into intelligent decisions — helping organizations detect, understand, and respond to incidents before they become disasters.
+
+```
+
+---
+
+If you want next upgrade, I can also:
+- make it **GitHub viral README (with badges + GIF + architecture diagram)**
+- or turn it into a **hackathon pitch deck (10 slides)**
+```
